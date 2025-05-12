@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compiler Analyzer</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        textarea { width: 100%; height: 100px; }
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 5px; }
+        .section { margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <h2>Enter your code:</h2>
+    <form method="POST">
+        <textarea name="code"></textarea><br><br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if lexical_result %}
+    <div class="section">
+        <h3>Lexical Analyzer</h3>
+        <table>
+            <tr><th>Token</th><th>Type</th><th>Position</th></tr>
+            {% for token in lexical_result %}
+            <tr><td>{{ token[0] }}</td><td>{{ token[1] }}</td><td>{{ token[2] }}</td></tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+    {% if syntax_result %}
+    <div class="section">
+        <h3>Syntax Analyzer</h3>
+        <p>Accepted? <strong>{{ syntax_result }}</strong></p>
+    </div>
+    {% endif %}
+
+    {% if predictive_result %}
+    <div class="section">
+        <h3>Predictive Parser</h3>
+        <pre>
+{{ predictive_result | join('\n') }}
+        </pre>
+    </div>
+    {% endif %}
+</body>
+</html>

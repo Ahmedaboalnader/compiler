@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compiler Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Enter your code:</h2>
+        <form method="POST">
+            <textarea name="code" rows="4" cols="50">{{ code }}</textarea><br>
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if tokens %}
+        <h3>Lexical Analysis Result:</h3>
+        <table>
+            <tr><th>Token</th><th>Type</th><th>Position</th></tr>
+            {% for token in tokens %}
+            <tr>
+                <td>{{ token[0] }}</td>
+                <td>{{ token[1] }}</td>
+                <td>{{ token[2] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>
